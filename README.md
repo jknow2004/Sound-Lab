@@ -49,7 +49,7 @@ GitHub's web uploader may hide dot-folders or make them difficult to select. Ens
 - Imported data are not synced between devices. Clearing browser site data can remove both history and journal. Download exports for backups.
 - Spotify login tokens live in session storage and are scoped to the current browser tab session. This is a client-side prototype, not an audited production multi-user service.
 - Playlist backup export contains metadata/URIs only, never audio content.
-- **Exact duplicates:** recordings from different releases may have different URIs. The in-place removal tool retains the first occurrence of each URI and only removes later repeats. It requests position-specific removal and saves a browser-local backup before making changes. Review the confirmation carefully, since it changes your Spotify playlist directly.
+- **Exact duplicates:** recordings from different releases may have different URIs. The in-place removal tool retains the first occurrence of each URI and only removes later repeats. Spotify no longer reliably supports position-specific URI deletion. The tool deletes all appearances of a repeated URI and immediately inserts one at its original adjusted position, verifying every stage. This may reset the retained entry’s Spotify Date Added. A browser-local backup is saved before making changes. If Spotify rejects a request midway, the cleanup stops and the user should inspect the playlist and backup before retrying. Review the confirmation carefully, since it changes your Spotify playlist directly.
 - The search-based Paster selects the first search result; always review the matches, which can be imperfect.
 - Spotify API permissions and endpoint availability can change and may differ by development-mode app.
 - Spotify platform rules restrict some derived listening metrics. Before public release, get a compliance review and confirm that the intended use of user-provided exports is permitted by relevant terms.
@@ -70,3 +70,7 @@ GitHub's web uploader may hide dot-folders or make them difficult to select. Ens
 - [Spotify understanding your data](https://support.spotify.com/au/article/understanding-your-data/)
 
 Independent project. Not affiliated with, endorsed by or sponsored by Spotify.
+
+
+### Album Journal lookup (v0.4)
+Open **Album Journal**, enter an album or artist in **Search Spotify albums**, select a result, then add your review and save. This uses the Spotify `/search?type=album` API and requires an authenticated Spotify connection. The album title, artist, release date, Spotify album URL, cover, and track count are stored in your browser. Existing journal entries are preserved. Manual entry works without Spotify.
