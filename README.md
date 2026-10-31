@@ -15,7 +15,7 @@ A **standalone** Spotify playlist management website, separate from Playlist Pas
 - Start-now vs. import-later onboarding selection.
 - Roadmap panels for more advanced features.
 
-**Not implemented yet:** server-side recurring sync, comprehensive analytics dashboards, restored playlist versions, discography completion, advanced merges/splits, multi-device accounts, and public-ready analytics compliance review. The site does **not** silently track plays in the background while closed. Spotify API listening analytics are deliberately not implemented; currently statistics come from the user's own downloaded archive only.
+**Not implemented yet:** comprehensive analytics dashboards, restored playlist versions, discography completion, advanced merges/splits, multi-device accounts, and public-ready analytics compliance review. The site does **not** track plays in the background. Spotify API-derived listening analytics are deliberately excluded because Spotify Developer Policy restricts creating listening metrics or user profiles from Spotify Platform data; currently statistics come from the user's own downloaded archive only.
 
 ## Quick GitHub Pages deployment
 
@@ -74,3 +74,21 @@ Independent project. Not affiliated with, endorsed by or sponsored by Spotify.
 
 ### Album Journal lookup (v0.4)
 Open **Album Journal**, enter an album or artist in **Search Spotify albums**, select a result, then add your review and save. This uses the Spotify `/search?type=album` API and requires an authenticated Spotify connection. The album title, artist, release date, Spotify album URL, cover, and track count are stored in your browser. Existing journal entries are preserved. Manual entry works without Spotify.
+
+## v0.5 upgrade: Visual Analytics and scan progress
+
+- Duplicate Detective shows an updating **page-by-page progress bar** while loading a playlist. Spotify returns up to 50 items per page; progress is displayed from the API's reported total and can briefly stay near 99% until the last page is complete. The scan does **not** remove songs; duplicate removal still requires confirmation.
+- Listening Analytics includes day/week/month/year/custom UTC date filters, top artists/tracks/albums with optional on-demand Spotify image lookup, an hourly chart and a text-based shareable PNG recap. The PNG is rendered in the browser from the user's imported data, without downloading or modifying Spotify cover art.
+- These features work with **imported** listening history only. There is no automatic tracking of newly played songs when the site is closed.
+- If importing historical data on a different device, export it from the old browser and re-import it in the new browser.
+- To update an existing installation, copy the contents of the extracted `SoundLab` folder into your local GitHub clone, preserving `.github/workflows/deploy.yml`, then Commit and Push in GitHub Desktop.
+
+
+
+## v0.7 — Imported-history-only analytics
+- Removed the Recent Activity page, its Web API fetch, and the `user-read-recently-played` OAuth permission.
+- Removed automated listening capture from the roadmap and clarified in the app that Spotify's developer policy restricts generating new listening metrics/profiles from Spotify Platform data. See https://developer.spotify.com/policy .
+- **Listening Analytics:** generated solely from explicitly uploaded Extended Streaming History ZIP/JSON exports. No background stream tracking, recent-play polling, or promises of real-time statistics.
+- **Playlist management:** Spotify authentication, playlist refresh, Duplicate Detective, album search, and other existing permitted tools remain available. Refreshing playlists does not track listening activity.
+- Import newer history files whenever available. This is a local-first prototype; before launching a public service, independently review the terms applicable to user-exported data as well.
+- Existing imported records, saved journal and settings remain in browser storage under their previous keys.
