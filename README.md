@@ -92,3 +92,7 @@ Open **Album Journal**, enter an album or artist in **Search Spotify albums**, s
 - **Playlist management:** Spotify authentication, playlist refresh, Duplicate Detective, album search, and other existing permitted tools remain available. Refreshing playlists does not track listening activity.
 - Import newer history files whenever available. This is a local-first prototype; before launching a public service, independently review the terms applicable to user-exported data as well.
 - Existing imported records, saved journal and settings remain in browser storage under their previous keys.
+
+
+## v0.8 — automatic images and local timezone
+Listening Analytics automatically requests Spotify artwork where available. Choose your IANA display timezone on Analytics or in Settings; default Australia/Brisbane. Imported UTC timestamps are preserved. This does not enable Spotify background listening tracking. See RELEASE-NOTES-v0.8.md.
